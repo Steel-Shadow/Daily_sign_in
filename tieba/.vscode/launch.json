@@ -1,0 +1,85 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run",
+            "request": "launch",
+            "mainClass": "top.srcrs.Run",
+            "projectName": "TiebaSignIn"
+        },
+        {
+            "name": "clang++ & lldb",
+            "type": "lldb",
+            "args": [],
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "preLaunchTask": "编译clang++"
+        },
+        {
+            "name": "lldb Launch for Cmake",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "env": {
+                "PATH": "${env:PATH}:${command:cmake.getLaunchTargetDirectory}"
+            },
+            "cwd": "${command:cmake.getLaunchTargetDirectory}"
+        },
+        {
+            "name": "gdb Launch for Cmake",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${command:cmake.getLaunchTargetDirectory}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "${env:PATH}:${command:cmake.getLaunchTargetDirectory}"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "gdb",
+            "type": "cppdbg",
+            "args": [],
+            "environment": [],
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "externalConsole": false,
+            "miDebuggerPath": "gdb"
+        },
+        {
+            "name": "lldb",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "VS Debugger",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal"
+        }
+    ]
+}
