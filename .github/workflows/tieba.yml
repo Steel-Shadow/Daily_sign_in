@@ -10,7 +10,6 @@ jobs:
     environment: tieba
     steps:
     - uses: actions/checkout@v2
-    - run: cd tieba
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -27,4 +26,5 @@ jobs:
         BDUSS: ${{ secrets.BDUSS }}
         SCKEY: ${{ secrets.SCKEY }}
       run: |
+        cd tieba
         mvn compile exec:java -Dexec.mainClass="top.srcrs.Run" -Dexec.args="${BDUSS} ${SCKEY}"

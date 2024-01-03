@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
-      - run: cd akkcloud
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
@@ -28,4 +26,6 @@ jobs:
           pip install -r requirements.txt
         
       - name: Sign in Akkcloud
-        run: python sign_in.py
+        run: |
+          cd akkcloud
+          python sign_in.py
