@@ -7,9 +7,6 @@ jobs:
   akkcloud_sign_in:
     runs-on: ubuntu-latest
     environment: akkcloud
-    env:
-      email: ${{ secrets.email }}
-      password: ${{ secrets.password }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -26,6 +23,9 @@ jobs:
           pip install -r akkcloud/requirements.txt
         
       - name: Sign in Akkcloud
+        env:
+          email: ${{ secrets.email }}
+          password: ${{ secrets.password }}
         run: |
           cd akkcloud
           python sign_in.py
