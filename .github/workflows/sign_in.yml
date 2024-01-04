@@ -27,3 +27,29 @@ jobs:
       run: |
         cd tieba
         mvn compile exec:java -Dexec.mainClass="top.srcrs.Run" -Dexec.args="${BDUSS} ${SCKEY}"
+
+  AkkcloudSignIn:
+    runs-on: ubuntu-latest
+    environment: akkcloud
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip" # caching pip dependencies
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r akkcloud/requirements.txt
+
+      - name: Sign in
+        env:
+          email: ${{ secrets.email }}
+          password: ${{ secrets.password }}
+        run: |
+          cd akkcloud
+          python sign_in.py
