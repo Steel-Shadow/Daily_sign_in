@@ -26,14 +26,14 @@ WebDriverWait(driver, 5).until(
     EC.element_to_be_clickable((By.ID, "login_submit"))
 ).click()
 
-signin_button = WebDriverWait(driver, 5).until(
+signin_button = WebDriverWait(driver, 10).until(
     EC.visibility_of_element_located((By.XPATH, '//*[@id="kt_subheader"]/div/div[2]/a'))
 )
 if signin_button.get_attribute("disabled"):
     print("已经签到过了")
 else:
     signin_button.click()
-    time.sleep(5)
+    time.sleep(10)
     if signin_button.get_attribute("disabled") != "disabled":
         print("签到失败")
     else:
