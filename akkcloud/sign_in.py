@@ -33,10 +33,5 @@ if signin_button.get_attribute("disabled"):
     print("已经签到过了")
 else:
     signin_button.click()
-    time.sleep(1000)
-    if signin_button.get_attribute("disabled") != "disabled":
-        print("签到失败")
-    else:
-        print("签到成功")
 
 driver.close()
