@@ -13,7 +13,19 @@ options.add_argument("--headless")
 driver = webdriver.Chrome(options=options)
 driver.get(baseUrl)
 
-home_web = driver.find_element(By.TAG_NAME, "a")
+try_times = 0
+max_try_times = 10
+while True:
+    try:
+        home_web = driver.find_element(By.TAG_NAME, "a")
+    except:
+        try_times += 1
+        time.sleep(1)
+    if home_web:
+        break
+    elif try_times > max_try_times:
+        raise RuntimeError("Can't find the home page link.")
+
 url = home_web.get_attribute("href")
 
 driver.get(url)
@@ -30,7 +42,7 @@ signin_button = WebDriverWait(driver, 10).until(
     EC.visibility_of_element_located((By.XPATH, '//*[@id="kt_subheader"]/div/div[2]/a'))
 )
 if signin_button.get_attribute("disabled"):
-    print("已经签到过了")
+    print("Already signed in.")
 else:
     signin_button.click()
 
