@@ -24,7 +24,7 @@ jobs:
     - name: Build with Maven
       env:
         BDUSS: ${{ secrets.BDUSS }}
-        SCKEY: ${{ secrets.SCKEY }}
+        # SCKEY: ${{ secrets.SCKEY }}
       run: |
         cd tieba
         mvn compile exec:java -Dexec.mainClass="top.srcrs.Run" -Dexec.args="${BDUSS} ${SCKEY}"
@@ -49,6 +49,7 @@ jobs:
 
       - name: Sign in
         env:
+          # secrets name is case insensitive
           email: ${{ secrets.email }}
           password: ${{ secrets.password }}
         run: |
