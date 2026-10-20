@@ -27,7 +27,15 @@ jobs:
         # SCKEY: ${{ secrets.SCKEY }}
       run: |
         cd tieba
-        mvn compile exec:java -Dexec.mainClass="top.srcrs.Run" -Dexec.args="${BDUSS} ${SCKEY}"
+        for attempt in 1 2 3; do
+          mvn -B -ntp compile org.codehaus.mojo:exec-maven-plugin:3.6.2:java -Dexec.mainClass="top.srcrs.Run" -Dexec.args="${BDUSS} ${SCKEY}" && break
+          if [ "$attempt" -eq 3 ]; then
+            echo "Maven command failed after ${attempt} attempts."
+            exit 1
+          fi
+          echo "Maven command failed on attempt ${attempt}; retrying..."
+          sleep 15
+        done
 
   AkkcloudSignIn:
     runs-on: ubuntu-latest
